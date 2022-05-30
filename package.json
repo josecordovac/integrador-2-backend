@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prebuild": "rm -rf ./dist",
-    "build": "babel ./src -d ./dist --ignore node_modules,test",
-    "prestart": "npm run build",
-    "start": "pm2-runtime start ./dist/index.js"
+    "dev": "nodemon src/index.js --exec babel-node ",
+    "build": "babel src -d dist",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
