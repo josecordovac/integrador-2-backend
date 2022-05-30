@@ -1,0 +1,32 @@
+@api = http://localhost:3000/products
+
+GET {{ api }}
+
+### add a product
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+  "name": "keyboard",
+  "description": "gaming",
+  "quantity": 1040
+} 
+
+### get product
+GET {{api}}/3
+
+### delete product 
+DELETE {{api}}/4
+
+### get count
+GET {{api}}/count
+
+### update
+PUT {{api}}/8
+Content-Type: application/json
+
+{
+  "name": "laptop",
+  "description": "some laptop",
+  "quantity": 20
+}
