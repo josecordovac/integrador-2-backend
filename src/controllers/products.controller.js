@@ -6,8 +6,9 @@ import { getConnection, sql, querys } from '../datebase'
 export const getProducts = async (req, res) => {
   try {
     const pool = await getConnection();
-    const result = await pool.request().query(querys.getAllProducts)
-    res.json(result?.recordset)
+    // const result = await pool.request().query(querys.getAllProducts)
+    // res.json(result?.recordset)
+    res.send("productos")
     
   } catch (error) {
     res.status(500);
