@@ -7,4 +7,5 @@ export const querys = {
   getTotalProducts: "SELECT COUNT(*) FROM webstore.dbo.Products",
   updateProductById:
     "UPDATE [webstore].[dbo].[Products] SET Name = @name, Description = @description, Quantity = @quantity WHERE Id = @id",
+  addNewProyect: "exec sp_new_proyect @data",
 };

@@ -1,47 +1,54 @@
 // import { getConecction, sql } from '../datebase/connection';
 // import querys from '../datebase/querys';
-import { getConnection, sql, querys } from '../datebase'
+import { getConnection, sql, querys } from "../datebase";
 
 // export const getProducts = (req, res) => res.send('products!!!')
-export const getProducts = async (req, res) => {
+export const getProyects = async (req, res) => {
   try {
-    const pool = await getConnection();
-    // const result = await pool.request().query(querys.getAllProducts)
-    // res.json(result?.recordset)
-    res.send("productos")
-    
+    // const pool = await getConnection();
+    // const result = await pool.request().query(querys.getAllProducts);
+    // res.json(result?.recordset);
+    res.json({ mensaje: "proyectos" });
   } catch (error) {
     res.status(500);
     res.send(error.message);
   }
-}
+};
 
-export const createNewProduct = async (req, res) => {
+export const createNewProyect = async (req, res) => {
   try {
-    const { name, description } = req.body
-    let { quantity } = req.body
-  
-    if (name == null || description == null) {
-      return res.status(400).json({msg: 'LLenar todos los campos'})
-    }
-  
-    if (quantity == null) quantity = 0;
-  
+    // const { name, description } = req.body;
+    // let { quantity } = req.body;
+
+    // if (name == null || description == null) {
+    //   return res.status(400).json({ msg: "LLenar todos los campos" });
+    // }
+
+    // if (quantity == null) quantity = 0;
+
+    // const pool = await getConnection();
+    // await pool
+    //   .request()
+    //   .input("name", sql.VarChar, name)
+    //   .input("description", sql.Text, description)
+    //   .input("quantity", sql.Int, quantity)
+    //   .query(querys.addNewProduct);
+
+    // res.json({ name, description, quantity });
+    const data = req.body;
     const pool = await getConnection();
-    await pool.request()
-    .input("name", sql.VarChar, name)
-    .input("description", sql.Text, description)
-    .input("quantity", sql.Int, quantity)
-    .query(querys.addNewProduct);
-    
-    res.json({ name, description, quantity })
-    
+    await pool
+      .request()
+      .input("data", sql.NVarChar, data)
+      .query(querys.addNewProyect);
+
+    res.json({ mensaje: "creados", body: req.body });
   } catch (error) {
     res.status(500);
     res.send(error.message);
   }
   // const pool = await getConecction();
-}
+};
 
 export const getProductById = async (req, res) => {
   try {
@@ -81,7 +88,8 @@ export const getTotalProducts = async (req, res) => {
 
   const result = await pool.request().query(querys.getTotalProducts);
   console.log(result);
-  res.json(result.recordset[0][""]);
+  let valor = result.recordset[0][""];
+  res.json(valor);
 };
 
 export const updateProductById = async (req, res) => {
