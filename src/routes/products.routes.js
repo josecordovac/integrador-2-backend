@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  getData,
   getProyects,
   createNewProyect,
   getProductById,
@@ -9,6 +10,8 @@ import {
 } from "../controllers/products.controller";
 
 const router = Router();
+
+router.post("/get-data", getData);
 
 router.get("/proyects", getProyects);
 

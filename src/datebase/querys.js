@@ -1,4 +1,5 @@
 export const querys = {
+  getQuery: "SELECT SQL_QUERY FROM FW_SQL WHERE SQL_ID = @sql_id",
   getAllProducts: "SELECT TOP(500) * FROM [webstore].[dbo].[Products]",
   getProducById: "SELECT * FROM Products Where Id = @Id",
   addNewProduct:
@@ -7,5 +8,5 @@ export const querys = {
   getTotalProducts: "SELECT COUNT(*) FROM webstore.dbo.Products",
   updateProductById:
     "UPDATE [webstore].[dbo].[Products] SET Name = @name, Description = @description, Quantity = @quantity WHERE Id = @id",
-  addNewProyect: "exec sp_new_proyect @data",
+  addNewProyect: "sp_new_proyect",
 };

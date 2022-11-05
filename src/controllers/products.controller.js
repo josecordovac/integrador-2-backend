@@ -1,17 +1,30 @@
-// import { getConecction, sql } from '../datebase/connection';
-// import querys from '../datebase/querys';
 import { getConnection, sql, querys } from "../datebase";
 
-// export const getProducts = (req, res) => res.send('products!!!')
-export const getProyects = async (req, res) => {
+export const getData = async (req, res) => {
   try {
-    // const pool = await getConnection();
-    // const result = await pool.request().query(querys.getAllProducts);
-    // res.json(result?.recordset);
-    res.json({ mensaje: "proyectos" });
+    const pool = await getConnection();
+    const { queryId } = req.body;
+
+    const resultQuery = await pool.request()
+    .input("sql_id", sql.Int, queryId)
+    .query(querys.getQuery);
+
+    const result = await pool.request()
+    .execute(resultQuery.recordset[0].SQL_QUERY)
+
+    res.status(200).json({dataList: result.recordset, ok: true});
   } catch (error) {
     res.status(500);
-    res.send(error.message);
+  }
+};
+
+export const getProyects = async (req, res) => {
+  try {
+    const pool = await getConnection();
+    const result = await pool.request().query(querys.getAllProducts);
+    res.json({ mensaje: "proyectos", resultados: result });
+  } catch (error) {
+    res.status(500).json({ok: false, error});
   }
 };
 
@@ -34,15 +47,19 @@ export const createNewProyect = async (req, res) => {
     //   .input("quantity", sql.Int, quantity)
     //   .query(querys.addNewProduct);
 
-    // res.json({ name, description, quantity });
-    const data = req.body;
+    // res.json({ name, description, quantity })
+    // [`[${informacion}]`]
+    const data = req.body
     const pool = await getConnection();
     await pool
       .request()
-      .input("data", sql.NVarChar, data)
-      .query(querys.addNewProyect);
+      .input("params", JSON.stringify(data))
+      // .execute("sp_new_proyect", function(err, recordsets, returnValue){
 
-    res.json({ mensaje: "creados", body: req.body });
+      // });
+
+    // res.json({ mensaje: "creados", body: req.body });
+    res.send(req.body);
   } catch (error) {
     res.status(500);
     res.send(error.message);
