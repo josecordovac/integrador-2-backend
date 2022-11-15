@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   getData,
+  saveData,
   getProyects,
   createNewProyect,
   getProductById,
@@ -12,6 +13,8 @@ import {
 const router = Router();
 
 router.post("/get-data", getData);
+
+router.post("/save-data", saveData);
 
 router.get("/proyects", getProyects);
 
