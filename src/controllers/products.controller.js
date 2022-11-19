@@ -1,4 +1,4 @@
-import { NVarChar } from "mssql";
+import { MAX, NVarChar } from "mssql";
 import { getConnection, sql, querys } from "../datebase";
 
 export const getData = async (req, res) => {
@@ -43,11 +43,12 @@ export const saveData = async (req, res) => {
 
     const { output, recordset} = await pool.request()
     .input("PARAMS", JSON.stringify(params))
-    .output("OUT_PARAMS", NVarChar(500))
+    .output("OUT_PARAMS", NVarChar(MAX))
     .execute(resultQuery.recordset[0].SQL_QUERY)
 
     let { dataObject, message, Total } = output.OUT_PARAMS ? JSON.parse(output.OUT_PARAMS) : {dataObject: [], message: "", Total: 0};
     
+    console.log(dataObject);
 
     let results = {
       dataList: recordset ? recordset : [],
