@@ -21,7 +21,7 @@ export const getData = async (req, res) => {
 export const getProyects = async (req, res) => {
   try {
     const pool = await getConnection();
-    const result = await pool.request().query(querys.getAllProducts);
+    const result = await pool.request().query(querys.getAllProjects);
     res.json({ mensaje: "proyectos", resultados: result });
   } catch (error) {
     res.status(500).json({ok: false, error});

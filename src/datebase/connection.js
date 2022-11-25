@@ -18,7 +18,7 @@ const dbSettings = {
     encrypt: true, // for azure
     // enableArithAbort: true
   },
-  port: 56327
+  port: 1433
 }
 
 export async function getConnection() {

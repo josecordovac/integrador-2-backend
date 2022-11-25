@@ -1,6 +1,7 @@
 export const querys = {
   getQuery: "SELECT SQL_QUERY FROM FW_SQL WHERE SQL_ID = @sql_id",
-  getAllProducts: "SELECT TOP(500) * FROM [webstore].[dbo].[Products]",
+  getAllProjects: "SELECT TOP(500) * FROM [programate].[dbo].[Proyecto]",
+  getAllProducts: "SELECT TOP(500) * FROM [webstore].[dbo].[Productos]",
   getProducById: "SELECT * FROM Products Where Id = @Id",
   addNewProduct:
     "INSERT INTO [webstore].[dbo].[Products] (name, description, quantity) VALUES (@name,@description,@quantity);",
